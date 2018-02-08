@@ -1,0 +1,30 @@
+<h1>Naїve sentiment analysis</h1>
+<p>
+  <%= text  = IO.read("./readme.md").force_encoding(Encoding::UTF_8); Kramdown::Document.new(text).to_html%>
+</p>
+<div class="row">
+<form action="/" method="post">
+  <textarea id="text" name="text" rows="7">
+    <%= @bind[:raw]%>
+  </textarea>
+  <p class="right">
+  <button type="submit" class="btn btn-success">Analyse!</button>
+  </p>
+</form>
+</div>
+
+<div class="row" style="margin-top:32px; margin-bottom:32px;">
+  <div class="col">
+    <span class="big">  <%= @bind[:count]%></span><h4>найдено слов</h4>
+  </div>
+  <div class="col">
+    <% factor = @bind[:sum].to_f / [@bind[:count].to_f,1].max %>
+    <span class="big <%= factor > 0 ? 'text-green-1' : 'text-red' %>"> <%= '%2.1f' % factor %></span><h4>тональность</h4>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    <%= sanitize @bind[:text] %>
+  </div>
+</div>
