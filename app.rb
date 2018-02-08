@@ -4,7 +4,6 @@
 require 'sinatra'
 require 'tokenizer'
 require 'sanitize'
-require 'kramdown'
 require './lib/stemmer.rb' # ~15% better to require 'lingua/stemmer'
 require './lib/utils.rb'
 

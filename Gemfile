@@ -8,4 +8,3 @@ gem 'thin'
 
 #Security
 gem 'sanitize'
-gem 'kramdown'

@@ -1,6 +1,6 @@
 <h1>Naїve sentiment analysis</h1>
 <p>
-  <%= text  = IO.read("./readme.md").force_encoding(Encoding::UTF_8); Kramdown::Document.new(text).to_html%>
+  <%= IO.read("./readme.md").force_encoding(Encoding::UTF_8) %>
 </p>
 <div class="row">
 <form action="/" method="post">
