@@ -10,15 +10,15 @@
 <section class='container'>
 <div class="row">
 <form action="/" method="post">
-  <textarea id="text" name="text" rows="7">
+  <textarea id="text" name="text" class="form-control" rows="7">
     <%= @bind[:raw]%>
   </textarea>
   <p class="right">
-  <button type="submit" class="btn btn-success">Analyse!</button>
+  <button type="submit" class="btn btn-primary">Анализируй это!</button>
   </p>
 </form>
 </div>
-<div class="row" style="margin-top:32px; margin-bottom:32px;">
+<div class="row" style="margin: 5rem 0 5rem 0;">
   <div class="col">
     <span class="big">  <%= @bind[:count]%></span><h4>найдено слов</h4>
   </div>
@@ -29,7 +29,7 @@
 </div>
 
 <div class="row">
-  <div>
+  <div class='paper'>
     <%= sanitize @bind[:text] %>
   </div>
 </div>

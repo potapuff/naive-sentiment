@@ -1,4 +1,5 @@
 GEM
+  remote: https://rubygems.org/
   specs:
     crass (1.0.2)
     daemons (1.2.5)
@@ -34,7 +35,7 @@ PLATFORMS
 
 DEPENDENCIES
   kramdown
-  sanitize
+  sanitize (~> 4.0, >= 4.0.1)
   sinatra
   thin
   tokenizer
