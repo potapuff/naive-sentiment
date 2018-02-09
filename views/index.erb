@@ -1,7 +1,13 @@
+<div class='jumbotron'>
+<section class='container'>
 <h1>Naїve sentiment analysis</h1>
 <p>
-  <%= IO.read("./readme.md").force_encoding(Encoding::UTF_8) %>
+  <%= settings.readme %>
 </p>
+</section>
+</div>
+
+<section class='container'>
 <div class="row">
 <form action="/" method="post">
   <textarea id="text" name="text" rows="7">
@@ -12,14 +18,13 @@
   </p>
 </form>
 </div>
-
 <div class="row" style="margin-top:32px; margin-bottom:32px;">
   <div class="col">
     <span class="big">  <%= @bind[:count]%></span><h4>найдено слов</h4>
   </div>
   <div class="col">
     <% factor = @bind[:sum].to_f / [@bind[:count].to_f,1].max %>
-    <span class="big <%= factor > 0 ? 'text-green-1' : 'text-red' %>"> <%= '%2.1f' % factor %></span><h4>тональность</h4>
+    <span class="big <%= factor > 0 ? 'text-green' : 'text-red' %>"> <%= '%2.1f' % factor %></span><h4>тональность</h4>
   </div>
 </div>
 
@@ -28,3 +33,4 @@
     <%= sanitize @bind[:text] %>
   </div>
 </div>
+</section>

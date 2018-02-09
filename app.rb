@@ -4,6 +4,7 @@
 require 'sinatra'
 require 'tokenizer'
 require 'sanitize'
+require 'kramdown'
 require './lib/stemmer.rb' # ~15% better to require 'lingua/stemmer'
 require './lib/utils.rb'
 
@@ -13,6 +14,10 @@ set :show_exceptions, false
 set :run, false
 
 configure do
+  set :readme, Proc.new {
+    text = IO.read("./readme.md").force_encoding(Encoding::UTF_8)
+    Kramdown::Document.new(text).to_html
+  }
   set :dictionary, Proc.new {
     file_name = './resources/tone-dict-uk.tsv'
     dict = {}
@@ -57,10 +62,10 @@ helpers do
   end
 
   LEVELS = {
-      -1 => 'red-1',
-      -0.5 => 'red-4',
-      0.5 => 'green-4',
-      1 => 'green-1',
+      -1.0 => 'red-1',
+      -0.5 => 'red-3',
+       0.5 => 'green-3',
+       1.0 => 'green-1',
   }
 
   def level(value)
