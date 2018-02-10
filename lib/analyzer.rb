@@ -1,6 +1,7 @@
 # encoding: utf-8
 require './lib/tokenizer'
 require './lib/stemmer'
+require './lib/utils'
 
 class Analyzer
 
