@@ -1,36 +1,63 @@
 <div class='jumbotron'>
-<section class='container'>
-<h1>Naїve sentiment analysis</h1>
-<p>
-  <%= settings.readme %>
-</p>
-</section>
+  <section class='container'>
+    <h1>Naїve sentiment analysis</h1>
+    <p>
+      <%= settings.readme %>
+    </p>
+  </section>
 </div>
 
 <section class='container'>
-<div class="row">
-<form action="/" method="post">
+  <div class="row">
+    <form action="/" method="post">
   <textarea id="text" name="text" class="form-control" rows="7">
-    <%= @bind[:raw]%>
+    <%= @bind.raw %>
   </textarea>
-  <p class="right">
-  <button type="submit" class="btn btn-primary">Анализируй это!</button>
-  </p>
-</form>
-</div>
-<div class="row" style="margin: 5rem 0 5rem 0;">
-  <div class="col">
-    <span class="big">  <%= @bind[:count]%></span><h4>найдено слов</h4>
+      <p class="right">
+        <button type="submit" class="btn btn-primary">Анализируй это!</button>
+      </p>
+    </form>
   </div>
-  <div class="col">
-    <% factor = @bind[:sum].to_f / [@bind[:count].to_f,1].max %>
-    <span class="big <%= factor > 0 ? 'text-green' : 'text-red' %>"> <%= '%2.1f' % factor %></span><h4>тональность</h4>
+  <div class="row" style="margin: 5rem 0 5rem 0;">
+    <div class="col">
+      <span class="big">  <%= @bind.result.count %></span><h4>найдено слов</h4>
+    </div>
+    <div class="col">
+      <span class="big <%= @bind.result.factor > 0 ? 'text-green' : 'text-red' %>"> <%= @bind.result.to_s %></span>
+      <h4>тональность</h4>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class='paper'>
-    <%= sanitize @bind[:text] %>
+  <div class="row">
+    <div class='paper'>
+      <%= sanitize @bind.text %>
+    </div>
   </div>
-</div>
+
+
+  <div class="row">
+    <h3>Детали:</h3>
+    <table>
+      <tr>
+        <th rowspan="2">Всего слов</th>
+        <th rowspan="2">Тональность<br/>(-1..1)</th>
+        <th colspan="2">Позитив</th>
+        <th colspan="2">Негатив</th>
+      </tr>
+      <tr>
+        <th>кол-во</th>
+        <th>сумма</th>
+        <th>кол-во</th>
+        <th>сумма</th>
+      </tr>
+      <tr>
+        <td><%= @bind.count %></td>
+        <td><%= @bind.result %></td>
+        <td><%= @bind.positive.count %></td>
+        <td><%= @bind.positive.sum %></td>
+        <td><%= @bind.negative.count %></td>
+        <td><%= @bind.negative.sum %></td>
+      </tr>
+    </table>
+  </div>
 </section>
